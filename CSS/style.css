@@ -1,0 +1,14 @@
+* {
+    background: aquamarine;
+}
+
+#signinnbanner {
+    width: 100%;
+}
+
+.signin {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    padding: auto;
+}
