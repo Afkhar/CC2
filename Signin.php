@@ -106,7 +106,7 @@
             }
             catch(PDOException $e)
             {
-               echo "Login Failed<br>";
+                echo "Login Failed<br>";
                 throw new PDOException($e->getMessage(), (int) $e->getCode());
             }
         }
