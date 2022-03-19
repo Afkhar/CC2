@@ -39,7 +39,7 @@ require_once 'connectdb.php';
 <?php 
 //Login Validation
 
-if(isset($_POST['Login']))
+/*if(isset($_POST['Login']))
 {
     
    try{
@@ -75,7 +75,7 @@ if(isset($_POST['Login']))
     {
         throw new PDOException($e->getMessage(),(int)$e->getCode());
     } 
-}
+}*/
 
 
 ?>

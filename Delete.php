@@ -2,7 +2,7 @@
     session_start();
     include_once 'connectdb.php';
 
-    $conn = connect2db();
+    /*$conn = connect2db();
     if(isset($_SESSION['User'])){
     
     //$query ="DELETE FROM `user` WHERE `Email`= :Email'";
@@ -11,7 +11,7 @@
         $stmt->execute();
     }
 
-    header('location:Index.php');
+    header('location:Index.php');*/
     
 
 ?>

@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `users` (
+  `ID` int(20) NOT NULL,
   `First_Name` varchar(20) NOT NULL,
   `Last_Name` varchar(20) NOT NULL,
   `NIC` varchar(20) NOT NULL,
@@ -54,7 +55,8 @@ INSERT INTO `users` (`First_Name`, `Last_Name`, `NIC`, `Email`, `Password`, `Gen
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`NIC`),
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY (`NIC`),
   ADD UNIQUE KEY `Email` (`Email`),
   ADD UNIQUE KEY `Phone No.` (`Phone_No`);
 COMMIT;

@@ -1,5 +1,9 @@
 <?php
-function connect2db ()
+
+
+    $conn = mysqli_connect("localhost", "root", "", "channeldoc_lk");
+
+/*function connect2db ()
 {
     $conn = null;
     $username = 'root';
@@ -27,4 +31,4 @@ function connect2db ()
 
     }
     return $conn;
-}
+}*/

@@ -1,4 +1,11 @@
-<?php require_once 'connectdb.php' ?>
+<?php 
+    // include our connect script 
+    require_once("connectdb.php"); 
+    // check to see if there is a user already logged in, if so redirect them 
+    session_start(); 
+    if (isset($_SESSION['FirstName']) && isset($_SESSION[''])) 
+        header("Location: main.php");  // redirect the user to the home page
+?>
 
 <html lang="en">
 <title>ChannalDoc.lk</title>
@@ -15,6 +22,18 @@
     <div class="RegisterForm">
         <h3>Create Account</h3>
     <br>
+    <div class="">
+	<?php
+		// check to see if the user successfully created an account
+		if (isset($success) && $success == true){
+			echo '<p color="green">Yay!! Your account has been created. <a href="./login.php">Click here</a> to login!<p>';
+		}
+		// check to see if the error message is set, if so display it
+		else if (isset($error_msg))
+			echo '<p color="red">'.$error_msg.'</p>';
+		
+	?>
+	</div>
     <form action="Signin.php" method='POST'>
             <label for='FirstName'>First Name</label><br><Input type='text' name='FirstName' required='yes' id='FirstName'>
         <br><label for='LastName'>Last Name</label><br><Input type='text' name='LastName' required='yes' id='LastName'>
@@ -76,8 +95,68 @@
         </div>
 
         <?php    
+        // check to see if the user successfully created an account 
+        if (isset($success) && $success == true){ 
+            echo '<font color="green">Yay!! Your account has been created. <a href="Login.php">Click here</a> to login!<font>'; 
+        } 
+        // check to see if the error message is set, if so display it 
+        else if (isset($error_msg)) 
+            echo '<font color="red">'.$error_msg.'</font>'; 
+        else
+            echo ''; // do nothing
+        
+        if (isset($_POST['Signin'])){ 
+            // get all of the form data 
+            $First_Name = $_POST['FirstName']; 
+            $Last_Name = $_POST['LastName'];
+            $NIC = $_POST['NIC']; 
+            $Email = $_POST['Email']; 
+            $Password = $_POST['Pass'];
+            $Gender = $_POST['Gender'];
+            $Type_of_User = $_POST['type'];
+            $Phone_No = $_POST['PhoneNumber'];
+            $_FILES = $_POST['Files'];
 
-        if(isset($_POST["Signin"]) && ($conn = connect2db()))
+            
+            // next code block 
+        }
+
+            // make sure the password meets the min strength requirements
+            if ( strlen($Password) >= 5 && strpbrk($Password, "!#$.,:;()") != false ){
+                // next code block
+            }
+            else
+                $error_msg = 'Your password is not strong enough. Please use another.';
+                $error_msg = 'Please fill out all required fields.';
+
+        $query = mysqli_query($conn, "SELECT * FROM users WHERE NIC='{$NIC}'");
+        if (mysqli_num_rows($query) == 0){
+            // create and format some variables for the database
+            $NIC = '';
+            $Password = md5($Password);
+            
+            // next code block
+        }
+        else
+            $error_msg = 'The profile has been made for this User.';
+        
+            mysqli_query($conn, "INSERT INTO users VALUES (
+                '{$First_Name}', '{$Last_Name}', '{$NIC}', '{$Email}', '{$Gender}', '{$Type_of_User}', '{$Phone_No}')");
+            
+            // verify the user's account was created
+            $query = mysqli_query($conn, "SELECT * FROM users WHERE NIC='{$NIC}'");
+            if (mysqli_num_rows($query) == 1){
+                
+                /* IF WE ARE HERE THEN THE ACCOUNT WAS CREATED! YAY! */
+                /* WE WILL SEND EMAIL ACTIVATION CODE HERE LATER */
+            
+                $success = true;
+            }
+            else
+                $error_msg = 'An error occurred and your account was not created.';
+
+
+    /*  if(isset($_POST["Signin"]) && ($conn = connect2db()))
         {
             
            try{
@@ -109,7 +188,7 @@
                 echo "Login Failed<br>";
                 throw new PDOException($e->getMessage(), (int) $e->getCode());
             }
-        }
+        }*/
           
         
         ?>
