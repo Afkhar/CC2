@@ -81,7 +81,7 @@
         {
             
            try{
-                $query ="INSERT INTO `users`(`First_Name`, `Last_Name`, `NIC`, `Email`, `Password`, `Gender`, `Type_of_User`, `Phone_No`, `Medical_Files`) 
+                $query ="INSERT INTO users(`First_Name`, `Last_Name`, `NIC`, `Email`, `Password`, `Gender`, `Type_of_User`, `Phone_No`, `Medical_Files`) 
                 VALUES (':First Name',':Last Name',':nic',':email',':password',':gender',':Type of Users',':Phone No','')";
                 $stmnt = $conn->prepare($query);
 

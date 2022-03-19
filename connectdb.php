@@ -4,7 +4,7 @@ function connect2db ()
     $conn = null;
     $username = 'root';
     $password = null;
-    $databaseName = 'channeldoc.lk'; //Add your database Name
+    $databaseName = 'channeldoc_lk'; //Add your database Name
     $servername= 'localhost';
 
     //data source Name
